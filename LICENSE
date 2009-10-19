@@ -8,7 +8,7 @@ Significant parts of the compiler borrow code from other projects,
 all released under the MIT license:
 - Lua                           <http://www.lua.org>
 - Kein-Hong Man's     Yueliang  <http://luaforge.net/projects/yueliang>
-- Tom·s Guisasola's   Lua Rings <http://www.keplerproject.org/rings>
+- Tom√°s Guisasola's   Lua Rings <http://www.keplerproject.org/rings>
 - Ben Sunshine-Hill's Pluto     <http://freshmeat.net/projects/pluto>
 - Thomas Reuben's     Bitlib    <http://luaforge.net/projects/bitlib>
 
