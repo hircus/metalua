@@ -21,6 +21,7 @@ if [ -z "${BUILD_LIB}" ]; then
 fi
 
 # Where to place the final results
+# DESTDIR=
 # INSTALL_BIN=/usr/local/bin
 # INSTALL_LIB=/usr/local/lib/lua/5.1
 if [ -z "${INSTALL_BIN}" ]; then
@@ -95,8 +96,12 @@ cat > make-install.sh <<EOF2
 #!/bin/sh
 mkdir -p ${INSTALL_BIN}
 mkdir -p ${INSTALL_LIB}
+if [ -n "${DESTDIR}" ]; then
+    mkdir -p ${DESTDIR}${INSTALL_BIN}
+    mkdir -p ${DESTDIR}${INSTALL_LIB}
+fi
 
-cat > ${INSTALL_BIN}/metalua <<EOF
+cat > ${DESTDIR}${INSTALL_BIN}/metalua <<EOF
 #!/bin/sh
 METALUA_LIB=${INSTALL_LIB}
 export LUA_PATH="?.luac;?.lua;\\\${METALUA_LIB}/?.luac;\\\${METALUA_LIB}/?.lua"
@@ -104,9 +109,9 @@ export LUA_MPATH="?.mlua;\\\${METALUA_LIB}/?.mlua"
 exec ${LUA} \\\${METALUA_LIB}/metalua.luac "\\\$@"
 EOF
 
-chmod a+x ${INSTALL_BIN}/metalua
+chmod a+x ${DESTDIR}${INSTALL_BIN}/metalua
 
-cp -R ${BUILD_LIB}/* ${INSTALL_LIB}/
+cp -pR ${BUILD_LIB}/* ${DESTDIR}${INSTALL_LIB}/
 EOF2
 chmod a+x make-install.sh
 
